@@ -13,26 +13,26 @@
           </div>
         </nav>
         <div class="article-list">
-          <div class="article-item">
+          <div v-for="article in articleList.data" :key="article.id" class="article-item">
             <div class="article-content">
-              <div class="article-title">DNS与解析</div>
+              <div class="article-title">{{article.title}}</div>
               <div class="article-info">
-                <div class="article-category">nodejs</div>
+                <div class="article-category">{{article.category_detail && article.category_detail.name}}</div>
                 <div class="article-author">
                   <span class="iconfont icon-zuozhe"></span>
-                  <span>刘洋</span>
+                  <span>{{article.author}}</span>
                 </div>
                 <div class="article-browse">
                   <span class="iconfont icon-eye"></span>
-                  <span>235</span>
+                  <span>{{article.browse}}</span>
                 </div>
                 <div class="article-browse">
                   <span class="iconfont icon-pinglun"></span>
-                  <span>33</span>
+                  <span>{{article.comments_nums}}</span>
                 </div>
                 <div class="article-create-at">
                   <span class="iconfont icon-shijian"></span>
-                  <span>2019-11-29</span>
+                  <span>{{article.created_at}}</span>
                 </div>
               </div>
             </div>
@@ -50,11 +50,7 @@
           </div>
           <ul class="category-list">
             <li class="category-item">全部文章</li>
-            <li class="category-item">html（8）</li>
-            <li class="category-item">vuejs（9）</li>
-            <li class="category-item">nodejs（88）</li>
-            <li class="category-item">js（6）</li>
-            <li class="category-item">小程序（66）</li>
+            <li v-for="category in categorylist" :key="category.id" class="category-item">{{category.name}}（ {{category.article_nums}} ）</li>
           </ul>
         </div>
       </div>
@@ -74,18 +70,35 @@ export default {
       title: 'FEblog - 专注前端开发博客'
     }
   },
+  async asyncData ({ $axios }) {
+    let [articleList, categorylist] = await Promise.all([$axios.$get('/api/v1/user/article'), $axios.$get('/api/v1/user/category')])
+    console.log(articleList, categorylist)
+    if (articleList.code === 200) {
+      return {
+        articleList: articleList.data,
+        categorylist: categorylist.data
+      }
+    }
+  },
   data () {
     return {
       articleNav: [
         {name: '最新', icon: 'icon-zuixinnew3', desc: 'created_at'},
         {name: '最热', icon: 'icon-remen', desc: 'browse'}
       ],
-      navIndex: 0
+      navIndex: 0,
+      articleList: [],
+      categorylist: []
     }
   },
   methods: {
     changeArticleDesc(desc, index) {
       console.log(desc)
+      console.log(this.$router)
+      this.$router.push({
+        path: '/',
+        query: { plan: 'private' }
+      })
       this.navIndex = index
     }
   }

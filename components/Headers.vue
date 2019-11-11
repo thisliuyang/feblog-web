@@ -65,7 +65,7 @@ nav {
   font-size: 16px;
   .nav-list {
     display: flex;
-    .nuxt-link-exact-active {
+    .nuxt-link-active {
       padding: 0 18px;
     }
   }
