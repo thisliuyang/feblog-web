@@ -1,5 +1,10 @@
 <template>
-  <div>footer</div>
+  <footer>
+    <div class="wrapper">
+      <div class="copyright"><a href="/">www.feblog.cn</a> - 前端博客 Copyright© Author thisliuyang@gmail.com</div>
+      <div>ICP备1888888号-3</div>
+    </div>
+  </footer>
 </template>
 <script>
 export default {
@@ -8,5 +13,19 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang="less" scoped>
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: #292929;
+  min-height: 80px;
+  .wrapper {
+    color: #fff;
+    text-align: center;
+    a {
+      color: #fff;
+    }
+  }
+}
 </style>

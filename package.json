@@ -12,16 +12,18 @@
     "test": "jest"
   },
   "dependencies": {
-    "nuxt": "^2.0.0",
+    "ant-design-vue": "^1.1.10",
     "cross-env": "^5.2.0",
     "koa": "^2.6.2",
-    "ant-design-vue": "^1.1.10"
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "nuxt": "^2.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9",
     "@vue/test-utils": "^1.0.0-beta.27",
     "babel-jest": "^24.1.0",
     "jest": "^24.1.0",
+    "nodemon": "^1.18.9",
     "vue-jest": "^4.0.0-0"
   }
 }
