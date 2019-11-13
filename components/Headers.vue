@@ -2,11 +2,11 @@
   <header>
     <div class="wrapper">
       <a href="/" class="logo-lick">
-        <img src="https://b-gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg" alt="logo">
+        <img class="logo" src="/img/feBlog.svg" alt="logo">
       </a>
       <nav>
         <ul class="nav-list">
-          <nuxt-link class="" to="/">首页</nuxt-link>
+          <nuxt-link to="/">首页</nuxt-link>
           <nuxt-link to="/">话题</nuxt-link>
           <nuxt-link to="/">工具</nuxt-link>
           <nuxt-link to="/">教程</nuxt-link>
@@ -53,6 +53,10 @@ header {
   margin: 0 auto;
   .logo-lick {
     margin-right: 24px;
+    .logo {
+      width: 100px;
+      height: 60px;
+    }
   }
 }
 
@@ -67,6 +71,9 @@ nav {
     display: flex;
     .nuxt-link-active {
       padding: 0 18px;
+      &:hover {
+        color: @brandcolor;
+      }
     }
   }
   .handle-list {

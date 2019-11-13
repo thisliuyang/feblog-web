@@ -7,13 +7,17 @@
           v-for="(nav, index) in articleNav"
           :key="index"
           @click="changeArticleDesc(nav.desc, index)"
-          :class="['article-nav-item', index === navIndex && 'article-nav-item--active']">
+          :class="['article-nav-item', 'cursor_pointer', index === navIndex && 'article-nav-item--active']">
             <span :class="['iconfont', nav.icon]"></span>
             <span>{{nav.name}}</span>
           </div>
         </nav>
         <div class="article-list">
-          <div v-for="article in articleList.data" :key="article.id" class="article-item">
+          <div 
+            v-for="article in articleList.data"
+            :key="article.id"
+            @click="goArtilceDetail(article.id)"
+            class="article-item">
             <div class="article-content">
               <div class="article-title">{{article.title}}</div>
               <div class="article-info">
@@ -37,7 +41,7 @@
               </div>
             </div>
             <div class="article-img">
-              <img src="http://q0mv5lv4t.bkt.clouddn.com/FmPuGBOmgaaoVKBbQUHHygvqvSMD" alt="">
+              <img :src="article.cover" alt="图片">
             </div>
           </div>
         </div>
@@ -70,15 +74,20 @@ export default {
       title: 'FEblog - 专注前端开发博客'
     }
   },
-  async asyncData ({ $axios }) {
-    let [articleList, categorylist] = await Promise.all([$axios.$get('/api/v1/user/article'), $axios.$get('/api/v1/user/category')])
-    console.log(articleList, categorylist)
-    if (articleList.code === 200) {
-      return {
-        articleList: articleList.data,
-        categorylist: categorylist.data
+  async asyncData ({ $axios, error }) {
+    try {
+      let [articleList, categorylist] = await Promise.all([$axios.$get('/api/v1/user/article'), $axios.$get('/api/v1/user/category')])
+      console.log(articleList, categorylist)
+      if (articleList.code === 200) {
+        return {
+          articleList: articleList.data,
+          categorylist: categorylist.data
+        }
       }
+    }catch {
+      error({ statusCode: 404, message: 'Post not found' })
     }
+
   },
   data () {
     return {
@@ -92,6 +101,11 @@ export default {
     }
   },
   methods: {
+    goArtilceDetail (id) {
+      this.$router.push({
+        path: `/article-detail/${id}`
+      })
+    },
     changeArticleDesc(desc, index) {
       console.log(desc)
       console.log(this.$router)
@@ -107,90 +121,88 @@ export default {
 
 <style lang="less">
 @brandcolor: #007fff;
-
-.container {
+.wrapper {
+  display: flex;
+  margin-top: 20px;
+}
+.article {
+  flex: 1;
   height: 100%;
-  padding-top: 60px;
-  min-height: 100vh;
-  .wrapper {
+  background: #fff;
+  .article-nav {
     display: flex;
-    margin-top: 20px;
+    padding: 16px 12px;
+    border-bottom: 1px solid #efefef;
+    .article-nav-item {
+      margin-right: 8px;
+    }
+    .article-nav-item--active {
+      color: @brandcolor;
+    }
   }
-  .article {
-    flex: 1;
-    height: 100%;
-    background: #fff;
-    .article-nav {
+  .article-list {
+    .article-item {
       display: flex;
-      padding: 16px 12px;
-      border-bottom: 1px solid #efefef;
-      .article-nav-item {
-        margin-right: 8px;
-        &:hover {
-          color: @brandcolor;
+      justify-content: space-between;
+      padding: 18px;
+      cursor: pointer;
+      border-bottom: 1px solid #f4f4f4;
+      &:hover {
+        background: #f4f4f4;
+      }
+      &:hover .article-content > .article-title {
+        color: #409EFF;
+      }
+      .article-content {
+        .article-title {
+          color: #464c5b;
+          font-size: 16px;
+          margin: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
-      }
-      .article-nav-item--active {
-        color: @brandcolor;
-      }
-    }
-    .article-list {
-      .article-item {
-        display: flex;
-        justify-content: space-between;
-        padding: 18px;
-        .article-content {
-          .article-title {
-            color: #464c5b;
+        .article-info {
+          display: flex;
+          align-items: center;
+          margin-top: 24px;
+          > div {
+            margin-right: 14px;
+          }
+          .article-category {
+            line-height: 24px;
+            padding: 0 20px;
             font-size: 16px;
-            margin: 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-          .article-info {
-            display: flex;
-            align-items: center;
-            margin-top: 24px;
-            > div {
-              margin-right: 14px;
-            }
-            .article-category {
-              line-height: 24px;
-              padding: 0 20px;
-              font-size: 16px;
-              color: #409eff;
-              border-radius: 20px;
-              background: rgba(51,119,255,.1);
+            color: #409eff;
+            border-radius: 20px;
+            background: rgba(51,119,255,.1);
 
-            }
           }
         }
-        .article-img {
-          width: 56px;
-        }
       }
-    }
-  }
-  .sidebar {
-    width: 230px;
-    margin-left: 20px;
-    .category {
-      background: #fff;
-      padding: 12px;
-      .category-title {
-        color: #464c5b;
-        font-size: 18px;
-        border-bottom: 1px solid #f0f0f0;
-      }
-      .category-list {
-        padding-top: 10px;
-        .category-item {
-          margin-bottom: 10px;
-        }
+      .article-img {
+        width: 56px;
       }
     }
   }
 }
-
+.sidebar {
+  width: 230px;
+  margin-left: 20px;
+  .category {
+    background: #fff;
+    padding: 12px;
+    .category-title {
+      color: #464c5b;
+      font-size: 18px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .category-list {
+      padding-top: 10px;
+      .category-item {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
 </style>

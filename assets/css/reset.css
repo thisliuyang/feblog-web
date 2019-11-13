@@ -192,6 +192,14 @@ p {
 .mb_20 {
   margin-bottom: 20px;
 }
+.cursor_pointer{
+  cursor: pointer;
+}
+.container {
+  height: 100%;
+  padding-top: 60px;
+  min-height: 100vh;
+}
 body {
   background: #f8f8f8;
 }
