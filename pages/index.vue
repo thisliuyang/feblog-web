@@ -4,10 +4,10 @@
       <article class="article">
         <nav class="article-nav">
           <div
-          v-for="(nav, index) in articleNav"
-          :key="index"
-          @click="changeArticleDesc(nav.desc, index)"
-          :class="['article-nav-item', 'cursor_pointer', index === navIndex && 'article-nav-item--active']">
+            v-for="(nav, index) in articleNav"
+            :key="index"
+            @click="changeArticleDesc(nav.desc, index)"
+            :class="['article-nav-item', 'cursor_pointer', index === navIndex && 'article-nav-item--active']">
             <span :class="['iconfont', nav.icon]"></span>
             <span>{{nav.name}}</span>
           </div>
@@ -78,7 +78,7 @@ export default {
     try {
       console.log(req, $axios)
       let [articleList, categorylist] = await Promise.all([$axios.$get('/user/article'), $axios.$get('/user/category')])
-      console.log(articleList, categorylist)
+
       if (articleList.code === 200) {
         return {
           articleList: articleList.data,
@@ -88,7 +88,6 @@ export default {
     }catch {
       error({ statusCode: 404, message: 'Post not found' })
     }
-
   },
   data () {
     return {

@@ -47,17 +47,8 @@ module.exports = {
   ],
   axios: {
     baseURL: process.env.NODE_ENV === 'production' ? 'http://api.feblog.cn/api/v1' : 'http://127.0.0.1:3001/api/v1',
-    // prefix: process.env.NODE_ENV === 'production' ? 'http://api.feblog.cn/api/v1' : '/api/v1',
-    proxy: true    
+    proxy: false
   },
-  // proxy: {
-  //   '/api/v1/': {
-  //     target: 'http://127.0.0.1:3001',
-  //     pathRewrite: {               
-  //        '^/api/v1/': '/api/v1/'            
-  //     }        
-  //   }    
-  // },
   /*
   ** Build configuration
   */
