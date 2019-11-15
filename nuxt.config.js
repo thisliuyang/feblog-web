@@ -31,7 +31,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/antd-ui'
+    '@/plugins/antd-ui',
+    '@/plugins/axios'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -44,18 +45,19 @@ module.exports = {
   modules: [
     '@nuxtjs/axios'
   ],
-  axios: {        
-    prefix: '/api/v1',
+  axios: {
+    baseURL: process.env.NODE_ENV === 'production' ? 'http://api.feblog.cn/api/v1' : 'http://127.0.0.1:3001/api/v1',
+    // prefix: process.env.NODE_ENV === 'production' ? 'http://api.feblog.cn/api/v1' : '/api/v1',
     proxy: true    
   },
-  proxy: {
-    '/api/v1/': {
-      target: 'http://127.0.0.1:3001',
-      pathRewrite: {               
-         '^/api/v1/': ''            
-      }        
-    }    
-  },
+  // proxy: {
+  //   '/api/v1/': {
+  //     target: 'http://127.0.0.1:3001',
+  //     pathRewrite: {               
+  //        '^/api/v1/': '/api/v1/'            
+  //     }        
+  //   }    
+  // },
   /*
   ** Build configuration
   */
@@ -67,3 +69,4 @@ module.exports = {
     }
   }
 }
+console.log(process.env.NODE_ENV)

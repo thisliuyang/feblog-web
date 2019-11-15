@@ -74,9 +74,10 @@ export default {
       title: 'FEblog - 专注前端开发博客'
     }
   },
-  async asyncData ({ $axios, error }) {
+  async asyncData ({ $axios, error, req }) {
     try {
-      let [articleList, categorylist] = await Promise.all([$axios.$get('/api/v1/user/article'), $axios.$get('/api/v1/user/category')])
+      console.log(req, $axios)
+      let [articleList, categorylist] = await Promise.all([$axios.$get('/user/article'), $axios.$get('/user/category')])
       console.log(articleList, categorylist)
       if (articleList.code === 200) {
         return {
