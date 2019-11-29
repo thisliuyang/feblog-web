@@ -1,5 +1,7 @@
 <template>
-  <div>aaaaaa</div>
+  <section class="container padding-top90">
+    ddd
+  </section>
 </template>
 <script>
 export default {

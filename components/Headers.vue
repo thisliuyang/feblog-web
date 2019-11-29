@@ -5,22 +5,17 @@
         <img class="logo" src="/img/feBlog.svg" alt="logo">
       </a>
       <nav>
-        <ul class="nav-list">
-          <nuxt-link to="/">首页</nuxt-link>
-          <nuxt-link to="/">话题</nuxt-link>
-          <nuxt-link to="/">工具</nuxt-link>
-          <nuxt-link to="/">教程</nuxt-link>
-          <nuxt-link to="/">关于</nuxt-link>
-        </ul>
+        <div class="nav-list">
+          <nuxt-link v-for="(nav, index) in navList" :key="index" class="nuxt-link-active" :to="nav.router">{{ nav.title }}</nuxt-link>
+        </div>
         <div class="handle-list">
           <a-input-search placeholder="搜索文章" style="width: 200px" @search="onSearch" />
-          <div class="write-article">写文章</div>
+          <nuxt-link :to="'createArticle'" class="write-article">写文章</nuxt-link>
           <div class="auth">
             <span class="login_btn">登录</span>
             <span>注册</span>
           </div>
         </div>
-
       </nav>
     </div>
   </header>
@@ -28,7 +23,14 @@
 <script>
 export default {
   data () {
-    return {}
+    return {
+      navList: [
+        { router: { name: 'index' }, title: '首页' },
+        { router: { name: 'a' }, title: '话题' },
+        { router: { name: 'b' }, title: '工具' },
+        { router: { name: 'c' }, title: '关于' }
+      ]
+    }
   },
   methods: {
     onSearch(val) {
@@ -41,7 +43,7 @@ export default {
 @brandcolor: #007fff;
 header {
   position: fixed;
-  z-index: 100;
+  z-index: 9999;
   width: 100%;
   background: #fff;
 }

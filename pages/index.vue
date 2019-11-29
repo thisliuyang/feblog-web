@@ -23,19 +23,19 @@
               <div class="article-info">
                 <div class="article-category">{{article.category_detail && article.category_detail.name}}</div>
                 <div class="article-author">
-                  <span class="iconfont icon-zuozhe"></span>
+                  <span class="iconfont icon-zuozhe4"></span>
                   <span>{{article.author}}</span>
                 </div>
                 <div class="article-browse">
-                  <span class="iconfont icon-eye"></span>
+                  <span class="iconfont icon-yanjing8"></span>
                   <span>{{article.browse}}</span>
                 </div>
                 <div class="article-browse">
-                  <span class="iconfont icon-pinglun"></span>
+                  <span class="iconfont icon-comment"></span>
                   <span>{{article.comments_nums}}</span>
                 </div>
                 <div class="article-create-at">
-                  <span class="iconfont icon-shijian"></span>
+                  <span class="iconfont icon-time"></span>
                   <span>{{article.created_at}}</span>
                 </div>
               </div>
@@ -49,7 +49,7 @@
       <div class="sidebar">
         <div class="category">
           <div class="category-title">
-            <span class="iconfont icon-zuozhe"></span>
+            <span class="iconfont icon-category"></span>
             <span>分类</span>
           </div>
           <ul class="category-list">
@@ -92,7 +92,7 @@ export default {
   data () {
     return {
       articleNav: [
-        {name: '最新', icon: 'icon-zuixinnew3', desc: 'created_at'},
+        {name: '最新', icon: 'icon-zuixin', desc: 'created_at'},
         {name: '最热', icon: 'icon-remen', desc: 'browse'}
       ],
       navIndex: 0,
@@ -119,7 +119,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @brandcolor: #007fff;
 .wrapper {
   display: flex;

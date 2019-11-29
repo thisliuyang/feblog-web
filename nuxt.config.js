@@ -25,14 +25,19 @@ module.exports = {
   css: [
     'ant-design-vue/dist/antd.css',
     '@/assets/css/reset.css',
-    '@/assets/css/font/iconfont.css'
+    '@/assets/css/font/iconfont.css',
+    'mavon-editor/dist/css/index.css'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
     '@/plugins/antd-ui',
-    '@/plugins/axios'
+    '@/plugins/axios',
+    {
+      src: '@/plugins/mavon-editor',
+      ssr: false
+    }
   ],
   /*
   ** Nuxt.js dev-modules
