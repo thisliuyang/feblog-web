@@ -66,7 +66,6 @@ export default {
   },
   async asyncData ({ $axios, error, req }) {
     try {
-      console.log(req, $axios)
       let [articleList, categorylist] = await Promise.all([$axios.$get('/user/article'), $axios.$get('/user/category')])
 
       if (articleList.code === 200) {
@@ -96,11 +95,24 @@ export default {
         path: `/article-detail/${id}`
       })
     },
+    async getArticleList (params) {
+      console.log(params)
+      let { data: { data, code} } = await this.$axios({
+        url: '/user/article',
+        params
+      })
+      if (code === 200) {
+        this.articleList = data
+      }
+      console.log(data)
+    },
     changeArticleDesc(desc, index) {
+      let query = { ...this.$route.query , ... { desc } }
       this.$router.push({
         path: '/',
-        query: { plan: 'private' }
+        query
       })
+      this.getArticleList(query)
       this.navIndex = index
     }
   }
