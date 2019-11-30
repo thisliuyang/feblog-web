@@ -27,14 +27,13 @@ export default {
   components: {
     Sidebar
   },
-  async asyncData ({ $axios }) {
+  async asyncData ({ $axios, params }) {
     try {
-      let [article, categorylist] = await Promise.all([$axios.$get('/user/article/5'), $axios.$get('/user/category')])
-      if (article.code === 200) {
-        return {
-          article: article.data,
-          categorylist: categorylist.data
-        }
+      let [article, categorylist] = await Promise.all([$axios.$get(`/user/article/${params.id}`), $axios.$get('/user/category')])
+
+      return {
+        article: article,
+        categorylist: categorylist
       }
     }catch {
       error({ statusCode: 404, message: 'Post not found' })

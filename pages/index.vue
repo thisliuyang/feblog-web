@@ -46,7 +46,7 @@
           </div>
         </div>
       </article>
-      <Sidebar :categorylist="categorylist"/>
+      <Sidebar :categorylist="categorylist" @changeArticleCategory="changeArticleCategory"/>
     </div>
   </section>
 </template>
@@ -54,6 +54,7 @@
 <script>
 import Logo from '~/components/Logo.vue'
 import Sidebar from '~/components/Sidebar.vue'
+import { getArticle } from '@/static/api/article'
 export default {
   components: {
     Logo,
@@ -64,16 +65,20 @@ export default {
       title: 'FEblog - 专注前端开发博客'
     }
   },
-  async asyncData ({ $axios, error, req }) {
+  async asyncData ({ $axios, error, req, params, route }) {
+    console.log(params, route.query)
     try {
-      let [articleList, categorylist] = await Promise.all([$axios.$get('/user/article'), $axios.$get('/user/category')])
+      let [articleList, categorylist] = await Promise.all([$axios({
+        url: '/user/article',
+        params: route.query
+      }), $axios.$get('/user/category')])
 
-      if (articleList.code === 200) {
-        return {
-          articleList: articleList.data,
-          categorylist: categorylist.data
-        }
+      return {
+        articleList: articleList.data,
+        categorylist: categorylist,
+        navIndex: route.query.desc === 'browse' && 1
       }
+
     }catch {
       error({ statusCode: 404, message: 'Post not found' })
     }
@@ -97,7 +102,7 @@ export default {
     },
     async getArticleList (params) {
       console.log(params)
-      let { data: { data, code} } = await this.$axios({
+      let { data, code } = await this.$axios({
         url: '/user/article',
         params
       })
@@ -114,6 +119,14 @@ export default {
       })
       this.getArticleList(query)
       this.navIndex = index
+    },
+    changeArticleCategory(categoryId) {
+      let query = { ...this.$route.query , ... { category_id:  categoryId} }
+      this.$router.push({
+        path: '/',
+        query
+      })
+      this.getArticleList(query)
     }
   }
 }

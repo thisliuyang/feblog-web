@@ -7,7 +7,11 @@
       </div>
       <ul class="category-list">
         <li class="category-item">全部文章</li>
-        <li v-for="category in categorylist" :key="category.id" class="category-item cursor_pointer">{{category.name}}（ {{category.article_nums}} ）</li>
+        <li v-for="category in categorylist"
+          :key="category.id"
+          @click="changeArticleCategory(category.id)"
+          class="category-item cursor_pointer"
+          >{{category.name}}（ {{category.article_nums}} ）</li>
       </ul>
     </div>
   </div>
@@ -19,6 +23,11 @@ export default {
   },
   props: {
     categorylist: {}
+  },
+  methods: {
+    changeArticleCategory (categoryId) {
+      this.$emit('changeArticleCategory', categoryId)
+    }
   }
 }
 </script>

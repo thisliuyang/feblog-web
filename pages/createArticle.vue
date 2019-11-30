@@ -84,12 +84,9 @@ export default {
   async asyncData ({ $axios, error, req }) {
     try {
       let [token, categorylist] = await Promise.all([$axios.$get('/user/qiniutoken'), $axios.$get('/user/category')])
-
-      if (categorylist.code === 200) {
-        return {
-          token: token.data,
-          categorylist: categorylist.data
-        }
+      return {
+        token: token.data,
+        categorylist: categorylist.data
       }
     }catch {
       error({ statusCode: 404, message: 'Post not found' })
@@ -123,8 +120,7 @@ export default {
       accept: '.jpg, .jpeg, .png',
       uploadData: {},
       headers: {},
-      fileList: [],
-      uploadUrl: process.env.VUE_APP_BASE_URL + '/photo/upload',
+      fileList: []
     }
   },
   methods: {
