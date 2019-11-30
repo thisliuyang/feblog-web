@@ -10,7 +10,7 @@
         </div>
         <div class="handle-list">
           <a-input-search placeholder="搜索文章" style="width: 200px" @search="onSearch" />
-          <nuxt-link :to="'createArticle'" class="write-article">写文章</nuxt-link>
+          <nuxt-link :to="{ name: 'createArticle' }" class="write-article">写文章</nuxt-link>
           <div class="auth">
             <span class="login_btn cursor_pointer">登录</span>
             <span class="cursor_pointer">注册</span>
@@ -43,7 +43,7 @@ export default {
 @brandcolor: #007fff;
 header {
   position: fixed;
-  z-index: 9;
+  z-index: 999;
   width: 100%;
   background: #fff;
 }

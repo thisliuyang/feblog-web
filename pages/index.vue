@@ -75,7 +75,7 @@ export default {
       return {
         articleList: articleList.data,
         categorylist: categorylist,
-        navIndex: route.query.desc === 'browse' && 1
+        navIndex: route.query.desc === 'browse' ? 1 : 0
       }
 
     }catch {

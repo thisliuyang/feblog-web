@@ -205,4 +205,5 @@ body {
 }
 .v-note-wrapper {
   box-shadow: none !important;
+  z-index: 998 !important;
 }

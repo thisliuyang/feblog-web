@@ -85,8 +85,8 @@ export default {
     try {
       let [token, categorylist] = await Promise.all([$axios.$get('/user/qiniutoken'), $axios.$get('/user/category')])
       return {
-        token: token.data,
-        categorylist: categorylist.data
+        token: token,
+        categorylist: categorylist
       }
     }catch {
       error({ statusCode: 404, message: 'Post not found' })
@@ -132,7 +132,7 @@ export default {
             ...this.formValidate,
             ...values
           }
-          let { data: { code, msg } } = await this.$axios.post('/user/article', this.formValidate)
+          let { code, msg } = await this.$axios.post('/user/article', this.formValidate)
           if (code === 200) {
             console.log(msg)
             this.$message.success(msg)
