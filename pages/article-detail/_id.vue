@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <div class="wrapper" id="article-detail">
+    <div class="wrapper">
       <mavon-editor
         style="height: 100%"
         :ishljs="true"
@@ -11,22 +11,29 @@
         :subfield="false"
         :toolbarsFlag="false">
       </mavon-editor>
+      <Sidebar :categorylist="categorylist"/>
     </div>
   </section>
 </template>
 <script>
+import Sidebar from '~/components/Sidebar.vue'
+
 export default {
   data () {
     return {
       article: {}
     }
   },
+  components: {
+    Sidebar
+  },
   async asyncData ({ $axios }) {
     try {
-      let { data : { code, data } } = await $axios.get('/user/article/5')
-      if (code === 200) {
+      let [article, categorylist] = await Promise.all([$axios.$get('/user/article/5'), $axios.$get('/user/category')])
+      if (article.code === 200) {
         return {
-          article: data
+          article: article.data,
+          categorylist: categorylist.data
         }
       }
     }catch {
@@ -41,7 +48,9 @@ export default {
 </script>
 <style lang="less" scoped>
 .container {
-  padding-top: 90px;
+  .wrapper {
+    display: flex;
+  }
   .article-detail {
     width: 700px;
   }

@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="wrapper">
-      <div class="copyright"><a href="/">www.feblog.cn</a> - 前端博客 Copyright© Author thisliuyang@gmail.com</div>
+      <div class="copyright"><a href="/">www.feblog.cn</a> - 专注前端博客 Copyright© Author thisliuyang@gmail.com</div>
       <div>鄂ICP备19004686号-3</div>
     </div>
   </footer>

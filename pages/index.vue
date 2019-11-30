@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <div class="wrapper">
+    <div class="wrapper df main">
       <article class="article">
         <nav class="article-nav">
           <div
@@ -46,28 +46,18 @@
           </div>
         </div>
       </article>
-      <div class="sidebar">
-        <div class="category">
-          <div class="category-title">
-            <span class="iconfont icon-category"></span>
-            <span>分类</span>
-          </div>
-          <ul class="category-list">
-            <li class="category-item">全部文章</li>
-            <li v-for="category in categorylist" :key="category.id" class="category-item">{{category.name}}（ {{category.article_nums}} ）</li>
-          </ul>
-        </div>
-      </div>
+      <Sidebar :categorylist="categorylist"/>
     </div>
   </section>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
-
+import Sidebar from '~/components/Sidebar.vue'
 export default {
   components: {
-    Logo
+    Logo,
+    Sidebar
   },
   head () {
     return {
@@ -107,8 +97,6 @@ export default {
       })
     },
     changeArticleDesc(desc, index) {
-      console.log(desc)
-      console.log(this.$router)
       this.$router.push({
         path: '/',
         query: { plan: 'private' }
@@ -119,13 +107,19 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @brandcolor: #007fff;
 .wrapper {
-  display: flex;
   margin-top: 20px;
 }
+.main {
+  position: relative;
+}
+.v-show-content {
+  background-color: #fff !important;
+}
 .article {
+  // width: 700px;
   flex: 1;
   height: 100%;
   background: #fff;
@@ -186,23 +180,5 @@ export default {
     }
   }
 }
-.sidebar {
-  width: 230px;
-  margin-left: 20px;
-  .category {
-    background: #fff;
-    padding: 12px;
-    .category-title {
-      color: #464c5b;
-      font-size: 18px;
-      border-bottom: 1px solid #f0f0f0;
-    }
-    .category-list {
-      padding-top: 10px;
-      .category-item {
-        margin-bottom: 10px;
-      }
-    }
-  }
-}
+
 </style>

@@ -12,8 +12,8 @@
           <a-input-search placeholder="搜索文章" style="width: 200px" @search="onSearch" />
           <nuxt-link :to="'createArticle'" class="write-article">写文章</nuxt-link>
           <div class="auth">
-            <span class="login_btn">登录</span>
-            <span>注册</span>
+            <span class="login_btn cursor_pointer">登录</span>
+            <span class="cursor_pointer">注册</span>
           </div>
         </div>
       </nav>
@@ -43,7 +43,7 @@ export default {
 @brandcolor: #007fff;
 header {
   position: fixed;
-  z-index: 9999;
+  z-index: 9;
   width: 100%;
   background: #fff;
 }
@@ -84,6 +84,9 @@ nav {
     color: @brandcolor;
     .write-article {
       padding: 0 18px;
+      &:hover {
+        color: @brandcolor;
+      }
     }
     .login_btn {
       &::after {

@@ -203,3 +203,6 @@ p {
 body {
   background: #f8f8f8;
 }
+.v-note-wrapper {
+  box-shadow: none !important;
+}
