@@ -54,7 +54,6 @@
 <script>
 import Logo from '~/components/Logo.vue'
 import Sidebar from '~/components/Sidebar.vue'
-import { getArticle } from '@/static/api/article'
 export default {
   components: {
     Logo,
