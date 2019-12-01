@@ -134,7 +134,6 @@ export default {
           }
           let { code, msg } = await this.$axios.post('/user/article', this.formValidate)
           if (code === 200) {
-            console.log(msg)
             this.$message.success(msg)
           }
         }
@@ -145,7 +144,7 @@ export default {
     },
     handleUploadChange ({ file, fileList }) {
       if (file.status === 'done') {
-        this.formValidate.cover = `http://file.feblog.cn/${file.response.key}`
+        this.formValidate.cover = `https://img.feblog.cn/${file.response.key}`
         this.$message.success(`${file.name} 上传成功`)
       } else if (file.status === 'error') {
         this.$message.error(`${file.name} 上传失败`)
