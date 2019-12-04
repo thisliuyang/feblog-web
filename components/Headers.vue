@@ -26,9 +26,9 @@ export default {
     return {
       navList: [
         { router: { name: 'index' }, title: '首页' },
-        { router: { name: 'a' }, title: '话题' },
-        { router: { name: 'b' }, title: '工具' },
-        { router: { name: 'c' }, title: '关于' }
+        { router: { name: 'column' }, title: '专栏' },
+        { router: { name: 'tools' }, title: '工具' },
+        { router: { name: 'about' }, title: '关于' }
       ]
     }
   },

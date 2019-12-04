@@ -1,10 +1,10 @@
 <template>
-  <section class="container padding-top90">
-    <div class="wrapper">
+  <section class="padding-top90">
+    <div class="">
       <a-form :form="form">
         <a-form-item
-          :label-col="formItemLayout.labelCol"
-          :wrapper-col="formItemLayout.wrapperCol"
+          :label-col="{ span: 5 }"
+          :wrapper-col="{ span: 5 }"
           label="文章标题"
           >
           <a-input
@@ -13,8 +13,8 @@
             />
         </a-form-item>
         <a-form-item
-          :label-col="formItemLayout.labelCol"
-          :wrapper-col="formItemLayout.wrapperCol"
+          :label-col="{ span: 5 }"
+          :wrapper-col="{ span: 5 }"
           label="作者"
           >
           <a-input
@@ -23,8 +23,8 @@
             />
         </a-form-item>
         <a-form-item
-          :label-col="formItemLayout.labelCol"
-          :wrapper-col="formItemLayout.wrapperCol"
+          :label-col="{ span: 5 }"
+          :wrapper-col="{ span: 5 }"
           label="文章分类"
           >
           <a-select
@@ -42,27 +42,30 @@
             </a-select>
           </a-form-item>
         <a-form-item
-          :label-col="formItemLayout.labelCol"
-          :wrapper-col="formItemLayout.wrapperCol"
+          :label-col="{ span: 5 }"
+          :wrapper-col="{ span: 8 }"
           label="文章封面"
           >
-          <a-upload-dragger
-            name="file"
-            :multiple="true"
-            listType="picture"
-            :data="{token}"
-            action="https://up-z1.qiniup.com"
-            @change="handleUploadChange"
-            >
-            <p class="ant-upload-drag-icon">
-              <a-icon type="inbox" />
-            </p>
-            <p class="ant-upload-text">点击或者拖动上传</p>
-          </a-upload-dragger>
+          <div class="upload_box">
+            <a-upload-dragger
+              name="file"
+              class="upload"
+              :multiple="false"
+              listType="picture"
+              :data="{token}"
+              action="https://up-z1.qiniup.com"
+              @change="handleUploadChange"
+              >
+              <p class="ant-upload-drag-icon">
+                <a-icon type="inbox" />
+              </p>
+              <p class="ant-upload-text">点击或者拖动上传</p>
+            </a-upload-dragger>
+            <img :src="formValidate.cover" alt="">
+          </div>
+
         </a-form-item>
         <a-form-item
-          :label-col="formItemLayout.labelCol"
-          :wrapper-col="formItemLayout.wrapperCol"
           label="文章内容"
           >
           <mavon-editor
@@ -72,9 +75,9 @@
             >
           </mavon-editor>
         </a-form-item>
-        <a-form-item>
+        <div class="button-submit">
           <a-button @click="handleSubmit('formValidate')" type="primary">提交</a-button>
-        </a-form-item>
+        </div>
       </a-form>
     </div>
   </section>
@@ -114,8 +117,8 @@ export default {
       },
       confirmLoading: false,
       formItemLayout: {
-        labelCol: { span: 4 },
-        wrapperCol: { span: 20 }
+        labelCol: { span: 2 },
+        wrapperCol: { span: 18 }
       },
       accept: '.jpg, .jpeg, .png',
       uploadData: {},
@@ -172,5 +175,23 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang="less" scoped>
+.button-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+.upload_box {
+  display: flex;
+  align-items: flex-start;
+  .upload {
+    flex: 1;
+    margin-right: 30px;
+  }
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}
 </style>
