@@ -51,7 +51,7 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   axios: {
-    baseURL: process.env.NODE_ENV === 'production' ? 'https://api.feblog.cn/api/v1' : 'http://127.0.0.1:3001/api/v1',
+    baseURL: process.env.NODE_ENV === 'production' ? 'http://feblog.cn/api/v1' : 'http://127.0.0.1:3001/api/v1',
     proxy: false
   },
   /*
